@@ -1,38 +1,33 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AWS Student Builder Group at EPN · Eventos</title>
-<meta name="description" content="Hub de eventos del AWS Student Builder Group at EPN. Cada evento tiene su propia vista, agenda, materiales y recursos.">
-<link rel="stylesheet" href="./assets/styles.css"></head>
-<body>
-<header class="topbar"><div class="wrap nav"><a class="brand" href="./">AWS SBG <span>at EPN</span></a><nav class="navlinks"><a href="#eventos">Eventos</a><a href="#estructura">Estructura</a><a href="#recursos">Recursos</a></nav></div></header>
+<meta name="description" content="Hub de eventos del AWS Student Builder Group at EPN, con una vista independiente por evento.">
+<link rel="stylesheet" href="./assets/styles.css"></head><body>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="./"><span class="brand-mark"></span>AWS SBG <span>at EPN</span></a><nav class="navlinks"><a href="#eventos">Eventos</a><a href="#sistema">Plantilla</a><a href="./eventos/evento-01/">Evento 1</a></nav></div></header>
 <main class="wrap">
-<section class="hero">
+<section class="hero"><div class="hero-panel">
 <div class="eyebrow">AWS Student Builder Group at EPN</div>
-<h1>Eventos para <span>aprender construyendo</span></h1>
-<p class="lead">Este sitio organiza cada evento como una vista independiente. Cada taller tendrá su objetivo, agenda, explicación conceptual, práctica guiada, materiales, publicación para Meetup/LinkedIn y checklist del equipo.</p>
-<div class="chips"><span class="chip">Cloud</span><span class="chip">Hands-on</span><span class="chip">AWS</span><span class="chip">EPN</span></div>
-<div class="btns"><a class="btn primary" href="./eventos/evento-01/">Abrir Evento 1</a><a class="btn" href="#eventos">Ver roadmap</a></div>
-</section>
+<h1>Una identidad. <span>Una vista por evento.</span></h1>
+<p class="lead">El sitio ahora sigue el lenguaje visual del material de merch que compartiste: azul marino, crema, naranja AWS, acentos cyan EPN, badges, bordes tipo patch y una composición limpia que recuerda hoodies, stickers, tote bags y welcome kits.</p>
+<div class="chips"><span class="chip">Navy</span><span class="chip">Cream</span><span class="chip">AWS Orange</span><span class="chip">EPN Cyan</span><span class="chip">Event Views</span></div>
+<div class="btns"><a class="btn primary" href="./eventos/evento-01/">Abrir Evento 1</a><a class="btn" href="#eventos">Ver todos</a></div>
+</div></section>
 
-<section id="eventos">
-<div class="kicker">Roadmap</div><h2>Un sitio, una vista por evento</h2>
-<div class="grid">
-<article class="card event-card"><span class="status live">● En preparación</span><div class="num">Evento 01</div><h3>Tu primer servidor en la nube 🚀</h3><p>Fundamentos de AWS: cloud, regiones, Availability Zones, IAM, costos, seguridad, EC2 y Security Groups. Cierra con una web publicada en Nginx.</p><div class="spacer"></div><a class="btn primary" href="./eventos/evento-01/">Ver evento completo</a></article>
-<article class="card event-card"><span class="status soon">Próximamente</span><div class="num">Evento 02</div><h3>Cloud Security Basics 🛡️</h3><p>MFA, IAM, roles, políticas, mínimo privilegio, secretos y errores de seguridad comunes para principiantes.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-02/">Ver borrador</a></article>
-<article class="card event-card"><span class="status soon">Próximamente</span><div class="num">Evento 03</div><h3>Serverless Sprint ⚡</h3><p>Introducción a arquitectura serverless con Lambda y API Gateway, con un reto corto y práctico.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-03/">Ver borrador</a></article>
-<article class="card event-card"><span class="status soon">Próximamente</span><div class="num">Evento 04</div><h3>AI Builder Night 🤖</h3><p>Primer contacto con IA generativa en AWS y una mini app guiada alrededor de un caso concreto.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-04/">Ver borrador</a></article>
-<article class="card event-card"><span class="status soon">Próximamente</span><div class="num">Evento 05</div><h3>Cloud Defense Challenge 🔐</h3><p>Retos introductorios de seguridad para identificar permisos excesivos, configuraciones inseguras y malas prácticas.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-05/">Ver borrador</a></article>
-<article class="card event-card"><span class="status soon">Próximamente</span><div class="num">Evento 06</div><h3>EPN Buildathon 🏆</h3><p>Cierre de la ruta con equipos construyendo una solución pequeña usando servicios AWS y una presentación final.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-06/">Ver borrador</a></article>
-</div>
-</section>
+<section id="sistema"><div class="card stitched"><div class="kicker">Sistema visual tomado del ZIP</div><h2>La plantilla base del sitio</h2>
+<p class="muted">La dirección visual se construyó a partir de <b>hoodie-colores.jpg</b>, <b>hoodie-minimal-colores.jpg</b>, <b>stickers.jpg</b>, <b>tote-escudos.jpg</b>, <b>kit-founder.jpg</b> y las variantes de <b>welcome-kit</b>. El ZIP no contiene código HTML; contiene referencias visuales, por eso convertimos ese lenguaje gráfico en una plantilla web reutilizable.</p>
+<div class="palette"><div class="swatch navy">NAVY</div><div class="swatch cream">CREAM</div><div class="swatch orange">ORANGE</div><div class="swatch cyan">CYAN</div><div class="swatch wine">WINE</div><div class="swatch forest">GREEN</div></div>
+<div class="template-strip"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<div class="two"><div><span class="patch">EVENT 01</span><h3 style="margin-top:14px">Patrón repetible</h3><p class="muted">Cada evento conserva la misma cabecera, badges, agenda, práctica, recursos y bloque de publicaciones.</p></div><div><span class="patch">EPN × AWS</span><h3 style="margin-top:14px">Identidad consistente</h3><p class="muted">La navegación y los componentes son compartidos; cambia el contenido y el acento de cada evento.</p></div></div>
+</div></section>
 
-<section id="estructura"><div class="card"><div class="kicker">Plantilla común</div><h2>Qué tendrá cada vista</h2>
-<div class="two"><ul class="check"><li>Objetivo y resultado esperado.</li><li>Agenda minuto a minuto.</li><li>Conceptos que se explican.</li><li>Guion para presentador.</li><li>Práctica paso a paso.</li><li>Checkpoints del público.</li></ul>
-<ul class="check"><li>Roles del Core Team.</li><li>Prerrequisitos.</li><li>Plan B técnico.</li><li>Descripción para Meetup.</li><li>Copy de LinkedIn/Instagram.</li><li>Checklist antes y después.</li></ul></div></div></section>
+<section id="eventos"><div class="kicker">Roadmap</div><h2>Eventos</h2><div class="grid">
+<article class="card event-card stitched"><span class="status live">● En preparación</span><div class="num">Evento 01</div><h3>Tu primer servidor en la nube 🚀</h3><p>Cloud, regiones, Availability Zones, IAM, MFA, costos, EC2, Security Groups y despliegue de una web.</p><div class="spacer"></div><a class="btn primary" href="./eventos/evento-01/">Ver evento</a></article>
+<article class="card event-card stitched"><span class="status soon">Próximamente</span><div class="num">Evento 02</div><h3>Cloud Security Basics 🛡️</h3><p>MFA, IAM, roles, políticas, mínimo privilegio y secretos.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-02/">Abrir vista</a></article>
+<article class="card event-card stitched"><span class="status soon">Próximamente</span><div class="num">Evento 03</div><h3>Serverless Sprint ⚡</h3><p>Lambda + API Gateway en una práctica corta y guiada.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-03/">Abrir vista</a></article>
+<article class="card event-card stitched"><span class="status soon">Próximamente</span><div class="num">Evento 04</div><h3>AI Builder Night 🤖</h3><p>Introducción a IA generativa en AWS con una mini app.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-04/">Abrir vista</a></article>
+<article class="card event-card stitched"><span class="status soon">Próximamente</span><div class="num">Evento 05</div><h3>Cloud Defense Challenge 🔐</h3><p>Retos beginner sobre permisos y configuraciones inseguras.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-05/">Abrir vista</a></article>
+<article class="card event-card stitched"><span class="status soon">Próximamente</span><div class="num">Evento 06</div><h3>EPN Buildathon 🏆</h3><p>Equipos, solución pequeña, servicios AWS y presentación final.</p><div class="spacer"></div><a class="btn" href="./eventos/evento-06/">Abrir vista</a></article>
+</div></section>
 
-<section id="recursos"><div class="card"><div class="kicker">Assets</div><h2>Merch e identidad</h2>
-<p class="muted">El ZIP que compartiste contiene 13 imágenes de merch: hoodies, tote bags, welcome kit, pines, stickers, termo, cuaderno y kit de founder member. Las vamos a tratar como una biblioteca de recursos visuales del grupo, separada de las páginas de cada evento, para no mezclar planificación del taller con identidad/merch.</p>
-<div class="note"><b>Estructura prevista:</b> <code>assets/merch/</code> para imágenes y una futura vista <code>/identidad/</code> para revisarlas por categorías.</div></div></section>
-
-<footer class="footer"><b>AWS Student Builder Group at EPN</b><br>Hub interno de planificación y materiales de eventos.</footer>
+<section><div class="card"><div class="kicker">Plantilla por evento</div><h2>Todas las vistas tendrán la misma estructura</h2><div class="two"><ul class="check"><li>Objetivo y resultado final.</li><li>Fundamentos que se enseñan.</li><li>Agenda minuto a minuto.</li><li>Guion del presentador.</li><li>Hands-on paso a paso.</li></ul><ul class="check"><li>Checkpoints y troubleshooting.</li><li>Roles del Core Team.</li><li>Meetup + LinkedIn + Instagram.</li><li>Checklist antes/durante/después.</li><li>Recursos post-evento.</li></ul></div></div></section>
+<footer class="footer"><b>AWS Student Builder Group at EPN</b><br>Sitio de planificación de eventos · comunidad estudiantil.</footer>
 </main></body></html>
