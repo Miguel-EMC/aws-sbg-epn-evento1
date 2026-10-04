@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evento 1 · Tu primer servidor en la nube · AWS Student Builder Group at EPN</title>
+<meta name="description" content="Plan completo del Evento 1 del AWS Student Builder Group at EPN: fundamentos de AWS, regiones, zonas, IAM, costos, seguridad y despliegue práctico en EC2.">
+<style>
+:root{
+  --bg:#07111f;--panel:#0e1b2f;--panel2:#132642;--text:#f5f8ff;--muted:#a9b8d2;
+  --blue:#38bdf8;--orange:#ff9900;--green:#22c55e;--purple:#a78bfa;--line:#243b60;
+  --danger:#fb7185;--soft:#0a1628;--shadow:0 18px 45px rgba(0,0,0,.26);--r:20px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+ radial-gradient(circle at 12% 0,#102b50 0,transparent 34%),
+ radial-gradient(circle at 90% 10%,#2b1748 0,transparent 22%),
+ var(--bg);color:var(--text);font:16px/1.62 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--blue)}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.wrap{width:min(1180px,92%);margin:auto}
+.hero{padding:72px 0 42px}
+.eyebrow,.kicker{font-weight:800;letter-spacing:.11em;text-transform:uppercase;font-size:.76rem}
+.eyebrow{color:var(--orange)} .kicker{color:var(--blue)}
+h1,h2,h3,h4{line-height:1.12;margin:0 0 .55rem}
+h1{font-size:clamp(2.5rem,7vw,5.2rem);max-width:1000px}
+h1 span{color:var(--blue)}h2{font-size:clamp(1.55rem,3vw,2.2rem)}
+.lead{font-size:1.16rem;color:var(--muted);max-width:900px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}
+.chip{border:1px solid var(--line);background:#0b1729;padding:8px 13px;border-radius:999px;font-weight:700;font-size:.9rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;border:1px solid var(--line);border-radius:12px;padding:11px 16px;color:var(--text);text-decoration:none;font-weight:800;background:var(--panel)}
+.btn.primary{background:var(--orange);color:#111827;border-color:transparent}
+section{padding:24px 0}
+.card{background:linear-gradient(180deg,rgba(19,38,66,.97),rgba(11,24,43,.97));border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.muted{color:var(--muted)}.small{font-size:.88rem}.big{font-size:1.08rem}
+.check{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.check li{padding-left:27px;position:relative}.check li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.timeline{display:grid;gap:12px}
+.slot{display:grid;grid-template-columns:115px 1fr;gap:18px;padding:18px;border:1px solid var(--line);border-radius:16px;background:#0c1729}
+.time{font-weight:900;color:var(--orange);font-variant-numeric:tabular-nums}
+.note{margin-top:10px;padding:12px 14px;border-radius:12px;background:#0b1a30;border:1px solid #1f3c64;color:#dbe8fa}
+.speaker{border-left:3px solid var(--purple);background:#16152a;padding:12px 14px;border-radius:10px;color:#e9e1ff}
+.warn{border-left:4px solid var(--orange);background:#211a10;padding:16px 18px;border-radius:12px}
+.danger{border-left-color:var(--danger);background:#26131a}
+.concept{border:1px solid var(--line);border-radius:16px;padding:18px;background:#0c1729}
+.concept .tag{display:inline-block;color:#06111f;background:var(--blue);font-weight:900;font-size:.7rem;border-radius:999px;padding:4px 8px;margin-bottom:8px}
+.concept.orange .tag{background:var(--orange)}.concept.green .tag{background:var(--green)}.concept.purple .tag{background:var(--purple)}
+.flow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.node{padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#0b1729;font-weight:800}
+.arrow{color:var(--orange);font-weight:900}
+.code{background:#040b14;border:1px solid #1b2d47;border-radius:14px;padding:16px;overflow:auto;color:#d9f2ff;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--blue)}
+.role{padding:18px;border:1px solid var(--line);border-radius:16px;background:#0c1729}.role b{color:var(--blue)}
+.copybox{position:relative}.copybox button{position:absolute;right:14px;top:14px;background:#162842;border:1px solid var(--line);color:var(--text);padding:7px 10px;border-radius:9px;cursor:pointer}
+.copytext{white-space:pre-wrap;background:#091423;border:1px solid var(--line);border-radius:14px;padding:20px;color:#e7eefb}
+footer{padding:48px 0 70px;color:var(--muted);font-size:.9rem}
+@media(max-width:900px){.grid3,.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.grid,.grid3,.grid4{grid-template-columns:1fr}.slot{grid-template-columns:1fr}.hero{padding-top:46px}}
+@media print{body{background:#fff;color:#111}.card,.slot,.role,.copytext,.concept,.note{box-shadow:none;background:#fff;color:#111;border-color:#ccc}.muted,.lead,footer{color:#444}.btn,button{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">AWS Student Builder Group at EPN · Evento 1</div>
+  <h1>Tu primer servidor <span>en la nube</span> 🚀</h1>
+  <p class="lead">Un workshop introductorio y práctico para entender AWS desde la base: nube, regiones, Availability Zones, IAM, seguridad, costos, buenas prácticas y finalmente levantar una instancia EC2 y publicar una página web real.</p>
+  <div class="chips">
+    <span class="chip">Virtual</span><span class="chip">2 h 15 min</span><span class="chip">20–30 asistentes</span>
+    <span class="chip">Principiantes</span><span class="chip">Teoría + práctica</span><span class="chip">EC2 + Security Groups</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="#agenda">Guion minuto a minuto</a>
+    <a class="btn" href="#fundamentos">Fundamentos AWS</a>
+    <a class="btn" href="#practica">Práctica</a>
+    <a class="btn" href="#meetup">Meetup</a>
+    <a class="btn" href="#linkedin">LinkedIn</a>
+  </div>
+</header>
+
+<section>
+<div class="grid">
+<div class="card">
+  <div class="kicker">Objetivo</div>
+  <h2>No solo “hacer clic”</h2>
+  <p class="big">La meta es que un estudiante que nunca usó AWS salga entendiendo <b>qué está creando, dónde está corriendo, quién puede acceder, qué podría costar dinero y cómo eliminarlo</b>.</p>
+</div>
+<div class="card">
+  <div class="kicker">Resultado final</div>
+  <h2>Algo funcionando</h2>
+  <ul class="check">
+    <li>Instancia EC2 desplegada.</li>
+    <li>Security Group entendido y configurado.</li>
+    <li>Nginx corriendo.</li>
+    <li>Página personalizada accesible por IP pública.</li>
+    <li>Recursos eliminados al terminar.</li>
+  </ul>
+</div>
+</div>
+</section>
+
+<section id="fundamentos">
+<div class="card">
+<div class="kicker">Parte 1 · Lo básico que sí queremos enseñar</div>
+<h2>Mapa mental de AWS para principiantes</h2>
+<p class="muted">No buscamos profundidad de certificación. Cada concepto debe responder una pregunta concreta antes de pasar a la práctica.</p>
+<div class="grid3" style="margin-top:18px">
+  <div class="concept"><span class="tag">1</span><h3>Cloud Computing</h3><p><b>Pregunta:</b> ¿por qué alquilar infraestructura en lugar de comprarla?</p><p class="muted">Elasticidad, pago por uso, aprovisionamiento rápido.</p></div>
+  <div class="concept orange"><span class="tag">2</span><h3>Regiones</h3><p><b>Pregunta:</b> ¿en qué parte del mundo estoy desplegando?</p><p class="muted">Una región es una ubicación geográfica de AWS. Elegir región afecta latencia, disponibilidad de servicios y costos.</p></div>
+  <div class="concept green"><span class="tag">3</span><h3>Availability Zones</h3><p><b>Pregunta:</b> ¿por qué una región tiene varias zonas?</p><p class="muted">Son ubicaciones físicamente separadas dentro de una región, útiles para diseñar alta disponibilidad.</p></div>
+  <div class="concept purple"><span class="tag">4</span><h3>IAM</h3><p><b>Pregunta:</b> ¿quién puede hacer qué?</p><p class="muted">Identidades, permisos, roles, MFA y principio de mínimo privilegio.</p></div>
+  <div class="concept"><span class="tag">5</span><h3>EC2</h3><p><b>Pregunta:</b> ¿qué es realmente “un servidor en AWS”?</p><p class="muted">Una máquina virtual con CPU, memoria, disco, sistema operativo y red.</p></div>
+  <div class="concept orange"><span class="tag">6</span><h3>Security Groups</h3><p><b>Pregunta:</b> ¿por qué mi servidor existe pero mi web no abre?</p><p class="muted">Firewall virtual asociado a recursos como EC2.</p></div>
+  <div class="concept green"><span class="tag">7</span><h3>Costos</h3><p><b>Pregunta:</b> ¿qué puede generar cargos?</p><p class="muted">Tiempo de cómputo, almacenamiento, transferencia, IPs y otros recursos según servicio.</p></div>
+  <div class="concept purple"><span class="tag">8</span><h3>Responsabilidad</h3><p><b>Pregunta:</b> ¿qué asegura AWS y qué aseguro yo?</p><p class="muted">Introducción simple al modelo de responsabilidad compartida.</p></div>
+  <div class="concept"><span class="tag">9</span><h3>Limpieza</h3><p><b>Pregunta:</b> ¿qué hago cuando termino?</p><p class="muted">Detener/terminar recursos y comprobar que no queden servicios activos.</p></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="grid">
+<div class="card">
+<div class="kicker">Regiones y AZ</div>
+<h2>Cómo explicarlo sin hacerlo pesado</h2>
+<div class="speaker">“AWS no es una computadora gigante en un único lugar. AWS tiene regiones distribuidas por el mundo. Dentro de cada región existen varias Availability Zones físicamente separadas. Hoy elegiremos una sola región para que todos trabajemos igual.”</div>
+<div class="flow">
+  <div class="node">AWS</div><span class="arrow">→</span>
+  <div class="node">Región</div><span class="arrow">→</span>
+  <div class="node">AZ A</div><div class="node">AZ B</div><div class="node">AZ C</div>
+</div>
+<p class="muted small">Ejemplo didáctico: una región ≈ ciudad/área geográfica; AZ ≈ centros de datos separados dentro de esa región. Aclarar que es una analogía, no una equivalencia literal.</p>
+</div>
+
+<div class="card">
+<div class="kicker">IAM rápido</div>
+<h2>Configuración y buenas prácticas</h2>
+<ul class="check">
+<li>Explicar por qué la cuenta root se usa solo para tareas que realmente la requieren.</li>
+<li>Mostrar MFA y recomendar habilitarlo.</li>
+<li>Diferenciar usuario, grupo, rol y política.</li>
+<li>Explicar mínimo privilegio: dar solo los permisos necesarios.</li>
+<li>No compartir contraseñas ni access keys.</li>
+<li>No subir secretos a GitHub.</li>
+</ul>
+<div class="speaker">“IAM responde una pregunta: ¿quién puede hacer qué sobre qué recurso? Si alguien necesita leer S3, no significa que deba poder borrar EC2.”</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="grid">
+<div class="card">
+<div class="kicker">Costos</div>
+<h2>Cloud sin sorpresas 💸</h2>
+<ul class="check">
+<li>Pago por uso no significa “todo es gratis”.</li>
+<li>Free Tier / créditos dependen de condiciones y límites.</li>
+<li>Un Budget es una alerta, no un interruptor automático de todos los gastos.</li>
+<li>Revisar Billing / Cost Explorer / Budgets.</li>
+<li>Etiquetar recursos ayuda a saber qué pertenece al taller.</li>
+<li>Eliminar recursos al finalizar.</li>
+</ul>
+<div class="speaker">“La mejor cost practice para un principiante es saber qué creó, cuánto tiempo lo va a usar y cómo eliminarlo.”</div>
+</div>
+
+<div class="card">
+<div class="kicker">Buenas prácticas</div>
+<h2>Checklist del día 1</h2>
+<ul class="check">
+<li>MFA habilitado.</li>
+<li>Región definida para el taller.</li>
+<li>Mínimo privilegio en IAM.</li>
+<li>Puertos abiertos solo cuando hacen falta.</li>
+<li>No usar 0.0.0.0/0 innecesariamente fuera del ejercicio.</li>
+<li>Evitar secretos en código.</li>
+<li>Usar nombres/tags claros para recursos.</li>
+<li>Revisar y limpiar recursos.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="agenda">
+<div class="card">
+<div class="kicker">Guion minuto a minuto</div>
+<h2>Agenda propuesta · 2 h 15 min</h2>
+<div class="timeline">
+
+<div class="slot"><div class="time">0:00–0:10</div><div><h3>1. Bienvenida + AWS Student Builder Group</h3>
+<p>Presentación rápida del Core Team, objetivo del grupo, reglas del evento y sondeo inicial.</p>
+<div class="speaker">“Hoy queremos que entiendan AWS desde la base y terminen con algo publicado por ustedes. No vamos a empezar con 40 servicios ni con una arquitectura imposible.”</div>
+</div></div>
+
+<div class="slot"><div class="time">0:10–0:25</div><div><h3>2. ¿Qué es cloud y qué es AWS?</h3>
+<p>On-premise vs cloud, pago por uso, elasticidad, servicios administrados. Mostrar consola y explicar que AWS agrupa servicios por categorías.</p>
+</div></div>
+
+<div class="slot"><div class="time">0:25–0:37</div><div><h3>3. Regiones, Availability Zones y elección de ubicación</h3>
+<p>Mapa de regiones. Explicar región, AZ, latencia y por qué todos usarán la misma región durante el workshop.</p>
+<div class="note"><b>Mini pregunta:</b> “Si mis usuarios están en Latinoamérica, ¿qué cosas considerarían antes de elegir una región?”</div>
+</div></div>
+
+<div class="slot"><div class="time">0:37–0:52</div><div><h3>4. IAM y seguridad básica</h3>
+<p>Root, MFA, usuarios, roles, políticas y mínimo privilegio. Mostrar IAM en consola sin crear una estructura compleja.</p>
+<div class="note"><b>Objetivo:</b> que comprendan que permisos y autenticación son parte del diseño, no algo que se agrega al final.</div>
+</div></div>
+
+<div class="slot"><div class="time">0:52–1:05</div><div><h3>5. Costos, Free Tier, Budgets y limpieza</h3>
+<p>Explicar qué puede generar costos, cómo revisar Billing, qué hace un Budget y por qué todo recurso del taller debe eliminarse.</p>
+<div class="speaker">“Una alerta de presupuesto ayuda a enterarte; no reemplaza el hábito de revisar y limpiar recursos.”</div>
+</div></div>
+
+<div class="slot"><div class="time">1:05–1:55</div><div><h3>6. Hands-on: levantar EC2 y publicar una web</h3>
+<p>EC2 → IP pública → intento fallido → Security Group → HTTP/80 → Instance Connect → Nginx → HTML.</p>
+<div class="note"><b>Momento clave:</b> dejar HTTP cerrado al principio para que experimenten el fallo y luego entiendan qué cambia al abrir el puerto 80.</div>
+</div></div>
+
+<div class="slot"><div class="time">1:55–2:05</div><div><h3>7. Personalización + Cloud Gallery</h3>
+<p>Cada participante modifica su página y envía su IP/URL. Mostrar varias en vivo.</p>
+</div></div>
+
+<div class="slot"><div class="time">2:05–2:10</div><div><h3>8. Builder Center + próximos pasos</h3>
+<p>QR/enlace a Builder Center, recursos recomendados y adelanto del Evento 2.</p>
+</div></div>
+
+<div class="slot"><div class="time">2:10–2:15</div><div><h3>9. Limpieza guiada + CSAT</h3>
+<p>Terminar EC2 todos juntos, comprobar recursos y compartir encuesta.</p>
+</div></div>
+
+</div>
+</div>
+</section>
+
+<section id="practica">
+<div class="card">
+<div class="kicker">Parte práctica</div>
+<h2>Hands-on completo</h2>
+
+<h3>Paso 0 · Check previo</h3>
+<ul class="check">
+<li>Todos en la región definida.</li>
+<li>Cuenta/lab/sandbox funcional.</li>
+<li>Nombre del recurso: <code>epn-evento1-tuNombre</code>.</li>
+<li>Tag sugerido: <code>Event=EPN-Event-01</code>.</li>
+</ul>
+
+<h3>Paso 1 · Crear EC2</h3>
+<ol>
+<li>Abrir EC2 → Launch instance.</li>
+<li>Nombre claro.</li>
+<li>Amazon Linux.</li>
+<li>Tipo pequeño permitido por el entorno elegido.</li>
+<li>Red por defecto para simplificar el primer taller.</li>
+<li>No habilitar HTTP todavía.</li>
+<li>Lanzar instancia.</li>
+</ol>
+
+<h3>Paso 2 · Checkpoint “¿por qué no carga?”</h3>
+<p>Copiar la IPv4 pública y abrir <code>http://IP_PUBLICA</code>. La web todavía no debe responder porque aún no existe servidor web y/o HTTP no está permitido.</p>
+
+<h3>Paso 3 · Entrar con EC2 Instance Connect</h3>
+<p>Evitar SSH local en este primer taller para no mezclar problemas de claves, terminales y sistemas operativos.</p>
+
+<h3>Paso 4 · Instalar Nginx</h3>
+<pre class="code">sudo dnf install -y nginx
+sudo systemctl enable --now nginx
+sudo systemctl status nginx --no-pager</pre>
+
+<h3>Paso 5 · Abrir HTTP/80</h3>
+<p>Editar el Security Group y agregar HTTP TCP/80. Para el ejercicio introductorio se puede permitir tráfico web público y explicar claramente qué significa el origen configurado.</p>
+
+<h3>Paso 6 · Crear la página</h3>
+<pre class="code">sudo tee /usr/share/nginx/html/index.html &gt; /dev/null &lt;&lt;'EOF'
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Mi primera web en AWS&lt;/title&gt;
+  &lt;style&gt;
+    body{
+      font-family:system-ui;
+      background:#0b1220;
+      color:white;
+      max-width:760px;
+      margin:80px auto;
+      padding:24px;
+    }
+    h1{color:#38bdf8}
+    .tag{display:inline-block;background:#ff9900;color:#111;padding:6px 10px;border-radius:999px}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;span class="tag"&gt;AWS Student Builder Group at EPN&lt;/span&gt;
+  &lt;h1&gt;Hola desde AWS 🚀&lt;/h1&gt;
+  &lt;p&gt;Soy TU_NOMBRE y esta es mi primera página corriendo en EC2.&lt;/p&gt;
+  &lt;p&gt;Hoy aprendí sobre regiones, IAM, costos, EC2 y Security Groups.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF</pre>
+
+<h3>Paso 7 · Personalizar</h3>
+<p>Cambiar nombre, carrera, frase, colores y contenido. Evitar descargar frameworks o dependencias innecesarias.</p>
+
+<h3>Paso 8 · Cloud Gallery</h3>
+<p>Formulario: nombre + carrera + IP/URL + “qué aprendí hoy”. Mostrar varias páginas en vivo.</p>
+
+<h3>Paso 9 · Limpieza obligatoria</h3>
+<ul class="check">
+<li>Terminar la instancia EC2.</li>
+<li>Confirmar que no queden instancias Running.</li>
+<li>Revisar recursos adicionales creados durante el taller.</li>
+<li>Volver a Billing/Budgets como cierre de aprendizaje.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<div class="grid">
+<div class="card">
+<div class="kicker">Checkpoints</div>
+<h2>Control del ritmo</h2>
+<ul class="check">
+<li>✅ Estoy en la región correcta.</li>
+<li>✅ Instancia Running.</li>
+<li>✅ Tengo IPv4 pública.</li>
+<li>✅ Entré con Instance Connect.</li>
+<li>❌ Mi web todavía no abre.</li>
+<li>✅ Agregué HTTP/80.</li>
+<li>✅ Nginx responde.</li>
+<li>✅ Personalicé mi HTML.</li>
+<li>✅ Envié mi URL a la galería.</li>
+<li>✅ Terminé mi instancia.</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="kicker">Plan de soporte</div>
+<h2>Para 20–30 personas</h2>
+<ul class="check">
+<li>1 presentador principal.</li>
+<li>1 guía técnico.</li>
+<li>2–3 mentores.</li>
+<li>1 moderador de chat/checkpoints.</li>
+<li>Breakout room de ayuda si la plataforma lo permite.</li>
+<li>No detener a todo el grupo por un caso individual.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<div class="grid3">
+<div class="role"><b>Leader / Host</b><p>Bienvenida, comunidad, fundamentos, Builder Center y cierre.</p></div>
+<div class="role"><b>Technical Lead</b><p>Regiones, IAM, EC2, Security Groups y demo principal.</p></div>
+<div class="role"><b>Mentor 1</b><p>Problemas de consola, EC2 y región.</p></div>
+<div class="role"><b>Mentor 2</b><p>Instance Connect, Nginx y HTML.</p></div>
+<div class="role"><b>Moderación</b><p>Chat, preguntas, checkpoints y tiempos.</p></div>
+<div class="role"><b>Operación</b><p>Meetup, asistencia, CSAT, evidencias y post-event.</p></div>
+</div>
+</section>
+
+<section>
+<div class="card">
+<div class="kicker">Preparación</div>
+<h2>Checklist del Core Team</h2>
+<table>
+<thead><tr><th>Cuándo</th><th>Acción</th></tr></thead>
+<tbody>
+<tr><td>2 semanas antes</td><td>Definir fecha, plataforma, cupo, roles y entorno (sandbox/lab/cuentas propias).</td></tr>
+<tr><td>10 días antes</td><td>Crear plantilla HTML, formulario Cloud Gallery y slides de fundamentos.</td></tr>
+<tr><td>1 semana antes</td><td>Ensayo completo: cuenta nueva → región → IAM → budget → EC2 → SG → Nginx → limpieza.</td></tr>
+<tr><td>5 días antes</td><td>Enviar prerrequisitos e instrucciones a inscritos.</td></tr>
+<tr><td>3 días antes</td><td>Asignar mentores y probar breakout rooms/chat/encuestas.</td></tr>
+<tr><td>Día anterior</td><td>Ensayo rápido y verificación de links, QR y formularios.</td></tr>
+<tr><td>Día del evento</td><td>Entrar 20–30 min antes. Revisar permisos de pantalla, grabación si aplica y roles.</td></tr>
+<tr><td>Después</td><td>Recap, materiales, fotos/capturas, CSAT y Post-Event Form.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<div class="card">
+<div class="kicker">Entorno de práctica</div>
+<h2>Antes de anunciar requisitos</h2>
+<div class="warn">
+<b>Preferido:</b> usar un entorno preconfigurado, Builder Lab o sandbox que soporte el ejercicio. Así se reduce la barrera de cuenta/tarjeta para principiantes.
+</div><br>
+<div class="warn danger">
+<b>Si usan cuentas AWS personales:</b> mandar la guía con una semana de anticipación, hacer una sesión corta de ayuda, usar un recurso pequeño, no incluir Elastic IP en el primer evento y limpiar todo al cierre.
+</div>
+</div>
+</section>
+
+<section id="meetup">
+<div class="card copybox">
+<button onclick="copyBlock('meetupText',this)">Copiar</button>
+<div class="kicker">Meetup</div>
+<h2>Descripción lista para publicar</h2>
+<div id="meetupText" class="copytext">🚀 Tu primer servidor en la nube | Fundamentos + Hands-on AWS para principiantes
+
+¿Nunca has usado AWS? Este evento está pensado para ti.
+
+Antes de desplegar, vamos a entender qué estamos haciendo.
+
+En este workshop virtual aprenderás desde cero:
+☁️ Qué es cloud computing y qué es AWS.
+🌎 Qué son las regiones y Availability Zones.
+🔐 Cómo funciona IAM y por qué importan MFA y mínimo privilegio.
+💸 Cómo pensar en costos, presupuestos y limpieza de recursos.
+🖥️ Qué es Amazon EC2.
+🛡️ Cómo funciona un Security Group.
+🌐 Cómo publicar una página web desde tu propio servidor en AWS.
+
+Después de los fundamentos pasaremos al hands-on:
+1. Lanzaremos una instancia EC2.
+2. Intentaremos acceder a nuestra web.
+3. Entenderemos por qué todavía no responde.
+4. Configuraremos HTTP en el Security Group.
+5. Entraremos al servidor con EC2 Instance Connect.
+6. Instalaremos Nginx.
+7. Publicaremos y personalizaremos nuestra página.
+8. Cerraremos eliminando correctamente los recursos.
+
+La idea no es darte un demo terminado para copiarlo: queremos que entiendas qué ocurre en cada paso y que salgas con algo construido por ti.
+
+🎯 Nivel: introductorio
+💻 Modalidad: virtual
+⏱️ Duración: ~2 h 15 min
+👥 Cupos limitados
+🎒 Recomendado para estudiantes que quieran comenzar en cloud y AWS.
+
+Los prerrequisitos definitivos del entorno práctico se enviarán a los inscritos antes del evento.
+
+Al final tendremos una Cloud Gallery, recursos para seguir aprendiendo y un espacio para conocer AWS Builder Center.
+
+Organiza:
+AWS Student Builder Group at National Polytechnic School (EPN)
+
+By registering for events, you certify that you have read and agree to the AWS Event Terms and Conditions.</div>
+</div>
+</section>
+
+<section id="linkedin">
+<div class="card copybox">
+<button onclick="copyBlock('linkedinText',this)">Copiar</button>
+<div class="kicker">LinkedIn</div>
+<h2>Publicación lista</h2>
+<div id="linkedinText" class="copytext">🚀 Nuestro primer workshop en AWS Student Builder Group at EPN empieza desde la base.
+
+☁️ TU PRIMER SERVIDOR EN LA NUBE
+
+Antes de desplegar una aplicación queremos responder las preguntas que un principiante realmente tiene:
+
+🌎 ¿Qué diferencia hay entre una región y una Availability Zone?
+🔐 ¿Qué es IAM y por qué no deberíamos dar permisos de más?
+💸 ¿Cómo funcionan los costos y cómo evitamos dejar recursos activos?
+🖥️ ¿Qué es EC2?
+🛡️ ¿Por qué un servidor puede estar encendido pero la web no ser accesible?
+
+Después pasaremos a la práctica.
+
+Cada participante levantará una instancia EC2, configurará el acceso web mediante un Security Group, entrará al servidor, instalará Nginx y publicará una página que podrá personalizar.
+
+Y cerraremos haciendo algo que también es parte de aprender cloud: limpiar correctamente los recursos.
+
+La idea es simple:
+👉 entender primero;
+👉 construir después;
+👉 terminar sabiendo qué hiciste y por qué.
+
+🎯 Nivel introductorio
+💻 Virtual
+⏱️ ~2 h 15 min
+📍 AWS Student Builder Group at EPN
+
+Muy pronto compartiremos fecha y registro oficial en Meetup.
+
+#AWS #AWSsbgl #AWSStudentBuilderGroupLeader #StudentsAtAWS #StudentsBuildAWS #CloudComputing #AmazonEC2 #EPN</div>
+</div>
+</section>
+
+<section>
+<div class="grid">
+<div class="card copybox">
+<button onclick="copyBlock('shortText',this)">Copiar</button>
+<div class="kicker">Instagram</div>
+<h2>Texto corto</h2>
+<div id="shortText" class="copytext">🚀 TU PRIMER SERVIDOR EN LA NUBE
+
+Fundamentos + práctica AWS desde cero.
+
+🌎 Regiones y Availability Zones
+🔐 IAM y seguridad
+💸 Costos y buenas prácticas
+🖥️ EC2
+🛡️ Security Groups
+🌐 Publica tu primera web
+
+No necesitas experiencia previa.
+
+Virtual · Nivel introductorio
+AWS Student Builder Group at EPN</div>
+</div>
+
+<div class="card">
+<div class="kicker">Carrusel</div>
+<h2>Slides para publicidad</h2>
+<ul class="check">
+<li>1 · Tu primer servidor en la nube 🚀</li>
+<li>2 · AWS desde cero: ¿qué es cloud?</li>
+<li>3 · Regiones vs Availability Zones.</li>
+<li>4 · IAM: quién puede hacer qué.</li>
+<li>5 · Costos: aprende sin sorpresas.</li>
+<li>6 · EC2: tu primer servidor.</li>
+<li>7 · “¿Por qué mi web no carga?” Security Groups.</li>
+<li>8 · Publica algo hecho por ti.</li>
+<li>9 · Fecha + hora + Meetup + CTA.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<div class="card">
+<div class="kicker">Límites del Evento 1</div>
+<h2>Lo que no vamos a meter todavía</h2>
+<ul class="check">
+<li>No Lambda, RDS, Bedrock y S3 en profundidad.</li>
+<li>No VPC avanzada, subnets personalizadas, NAT Gateway o Load Balancer.</li>
+<li>No Elastic IP.</li>
+<li>No access keys ni AWS CLI como requisito.</li>
+<li>No premios con créditos del Core Team.</li>
+<li>No prometer créditos a asistentes sin confirmación oficial.</li>
+</ul>
+</div>
+</section>
+
+<footer>
+<p><b>Documento interno de planificación · AWS Student Builder Group at EPN</b></p>
+<p>Versión ampliada: fundamentos AWS + práctica EC2. Completar fecha, plataforma y entorno antes de publicar.</p>
+</footer>
+</div>
+
+<script>
+function copyBlock(id,btn){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    const old=btn.textContent;btn.textContent="Copiado ✓";
+    setTimeout(()=>btn.textContent=old,1600)
+  });
+}
+</script>
+</body>
+</html>
