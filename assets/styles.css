@@ -63,3 +63,55 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;bor
 .ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ref{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff}.ref strong{display:block;color:var(--navy);margin-bottom:5px}
 .footer{padding:50px 0 70px;color:#6a7785;font-size:.9rem}
 @media(max-width:980px){.hero-shell{grid-template-columns:58px 1fr}.hero-art{display:none}.grid,.ref-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:720px){.grid,.two,.ref-grid{grid-template-columns:1fr}.slot{grid-template-columns:1fr}.navlinks{display:none}.hero-shell{grid-template-columns:1fr}.hero-rail{display:none}.hero-copy{padding:36px 26px}.copybox button{position:static;margin-bottom:10px}}
+
+
+/* --- Merch ZIP gallery / event template v2 --- */
+.hero-merch{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);
+  min-height:600px;
+  background:var(--navy);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid #163b5d;
+}
+.hero-merch-copy{padding:clamp(34px,5vw,64px);color:#fff;display:flex;flex-direction:column;justify-content:center}
+.hero-merch-visual{position:relative;min-height:520px;background:#fff;overflow:hidden}
+.hero-merch-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.hero-merch-visual:after{content:"";position:absolute;inset:0;box-shadow:inset 40px 0 65px rgba(11,31,51,.23);pointer-events:none}
+.hero-merch .lead{color:#dbe7f0}
+.zip-badge{display:inline-flex;width:max-content;align-items:center;gap:8px;background:rgba(85,200,223,.12);border:1px solid rgba(85,200,223,.45);color:#bfeaf2;padding:7px 10px;border-radius:8px;font-size:.75rem;font-weight:950;letter-spacing:.09em;text-transform:uppercase;margin-bottom:16px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.section-head p{max-width:720px;margin:0;color:var(--muted)}
+.merch-board{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.merch-board img{width:100%;height:auto;display:block}
+.merch-board-caption{padding:16px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+.merch-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.merch-card{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 12px 30px rgba(11,31,51,.08);transition:.2s transform,.2s box-shadow}
+.merch-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(11,31,51,.13)}
+.merch-thumb{aspect-ratio:1/1;background-image:url('./merch/merch-contact.jpg');background-repeat:no-repeat;background-size:300% 500%;background-color:#eef3f7}
+.merch-card .body{padding:14px 15px 16px}.merch-card h3{font-size:1rem;margin:0 0 5px}.merch-card p{font-size:.86rem;color:var(--muted);margin:0}
+.m1{background-position:0% 0%}.m2{background-position:50% 0%}.m3{background-position:100% 0%}
+.m4{background-position:0% 25%}.m5{background-position:50% 25%}.m6{background-position:100% 25%}
+.m7{background-position:0% 50%}.m8{background-position:50% 50%}.m9{background-position:100% 50%}
+.m10{background-position:0% 75%}.m11{background-position:50% 75%}.m12{background-position:100% 75%}
+.m13{background-position:0% 100%}
+.template-anatomy{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.anatomy-step{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;position:relative}
+.anatomy-step b{display:block;color:var(--navy);margin-bottom:5px}.anatomy-step span{font-size:.85rem;color:var(--muted)}
+.anatomy-step:before{content:attr(data-step);display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--navy);color:#fff;font-size:.72rem;font-weight:1000;margin-bottom:10px}
+.event-theme-bar{display:flex;height:9px;border-radius:999px;overflow:hidden;margin:18px 0 8px}.event-theme-bar i{flex:1}.event-theme-bar i:nth-child(1){background:var(--navy)}.event-theme-bar i:nth-child(2){background:var(--sky)}.event-theme-bar i:nth-child(3){background:var(--orange)}.event-theme-bar i:nth-child(4){background:var(--burgundy)}.event-theme-bar i:nth-child(5){background:var(--green)}
+.merch-callout{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.merch-callout .crop{min-height:330px;border-radius:18px;background-image:url('./merch/merch-contact.jpg');background-repeat:no-repeat;background-size:300% 500%;box-shadow:var(--shadow)}
+@media(max-width:1020px){
+ .hero-merch{grid-template-columns:1fr}.hero-merch-visual{min-height:420px}
+ .merch-grid{grid-template-columns:repeat(3,1fr)}
+ .template-anatomy{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:720px){
+ .merch-grid{grid-template-columns:repeat(2,1fr)}
+ .template-anatomy{grid-template-columns:1fr}
+ .merch-callout{grid-template-columns:1fr}
+ .hero-merch-visual{min-height:330px}
+}
